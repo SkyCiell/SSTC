@@ -1,0 +1,30 @@
+-- MySQL Schema for Screenshot-to-Code
+
+CREATE DATABASE IF NOT EXISTS screenshot_to_code;
+USE screenshot_to_code;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS projects (
+  id VARCHAR(36) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  original_image LONGTEXT NOT NULL,
+  framework ENUM('html-css', 'react-tailwind') NOT NULL DEFAULT 'react-tailwind',
+  generated_code LONGTEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS project_versions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  project_id VARCHAR(36) NOT NULL,
+  code LONGTEXT NOT NULL,
+  version INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+);

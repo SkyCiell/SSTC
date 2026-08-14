@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Production builds
+client/dist/
+dist/
+
+# Environment variables (SECURITY: DO NOT COMMIT API KEYS)
+.env
+server/.env
+*.env
+
+# Temporary / Scratch Test Files
+server/scratch_test_*
+server/test_*
+scratch/
+
+# System / Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
